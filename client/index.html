@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Secure Notes App</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary: #4ade80;
+        --primary-light: #bbf7d0;
+        --secondary: #60a5fa;
+        --dark: #1e293b;
+        --light: #f8fafc;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f0fdf4;
+        min-height: 100vh;
+        position: relative;
+        overflow-x: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .bg-shapes {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        overflow: hidden;
+      }
+
+      .shape {
+        position: absolute;
+        border-radius: 50%;
+        opacity: 0.1;
+      }
+
+      .shape-1 {
+        width: 300px;
+        height: 300px;
+        background: var(--primary);
+        top: -100px;
+        left: -100px;
+      }
+
+      .shape-2 {
+        width: 200px;
+        height: 200px;
+        background: var(--secondary);
+        bottom: -50px;
+        right: -50px;
+      }
+
+      .container {
+        position: relative;
+        z-index: 1;
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(10px);
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        width: 100%;
+        max-width: 400px;
+        padding: 2rem;
+      }
+
+      .form-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .form-toggle {
+        display: flex;
+        border-bottom: 1px solid #e2e8f0;
+        margin-bottom: 1rem;
+      }
+
+      .form-toggle button {
+        flex: 1;
+        padding: 0.75rem;
+        background: none;
+        border: none;
+        font-weight: 500;
+        cursor: pointer;
+        position: relative;
+      }
+
+      .form-toggle button.active {
+        color: var(--primary);
+      }
+
+      .form-toggle button.active::after {
+        content: "";
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: var(--primary);
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .form-input {
+        padding: 0.75rem 1rem;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        transition: all 0.2s ease;
+      }
+
+      .form-input:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.2);
+      }
+
+      .btn {
+        padding: 0.75rem 1rem;
+        border-radius: 8px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        border: none;
+      }
+
+      .btn-primary {
+        background: var(--primary);
+        color: white;
+      }
+
+      .btn-primary:hover {
+        background: #22c55e;
+        transform: translateY(-2px);
+      }
+
+      .tagline {
+        text-align: center;
+        font-size: 0.9rem;
+        color: #64748b;
+        margin-top: 1rem;
+        font-style: italic;
+      }
+
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bg-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+    </div>
+
+    <div class="container">
+      <h1 class="text-2xl font-bold text-center mb-2 text-gray-800">
+        Secure Notes
+      </h1>
+      <p class="tagline">Remember one password, store a thousand notes</p>
+
+      <div class="form-toggle">
+        <button class="active" id="loginTab">Login</button>
+        <button id="registerTab">Register</button>
+      </div>
+
+      <div class="form-container">
+        <!-- Login Form -->
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="loginEmail">Email</label>
+            <input type="email" id="loginEmail" class="form-input" required />
+          </div>
+          <div class="form-group">
+            <label for="loginPassword">Password</label>
+            <input
+              type="password"
+              id="loginPassword"
+              class="form-input"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+
+        <!-- Register Form -->
+        <form id="registerForm" class="hidden">
+          <div class="form-group">
+            <label for="registerUsername">Username</label>
+            <input
+              type="text"
+              id="registerUsername"
+              class="form-input"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="registerEmail">Email</label>
+            <input
+              type="email"
+              id="registerEmail"
+              class="form-input"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="registerPassword">Password</label>
+            <input
+              type="password"
+              id="registerPassword"
+              class="form-input"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
