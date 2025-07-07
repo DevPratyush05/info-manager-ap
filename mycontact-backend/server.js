@@ -10,7 +10,7 @@ const errorHandler = require("./middleware/errorHandler");
 
 // Import new routes and existing ones
 const authRoutes = require("./routes/authRoutes");
-//const noteRoutes = require("./routes/noteRoutes"); // NEW: Import note routes
+const noteRoutes = require("./routes/noteRoutes"); // NEW: Import note routes
 //const {
 //  logoutUser,
 //  deleteUserAccount,
@@ -50,7 +50,7 @@ app.use("/api", limiter); // Apply to all /api routes
 
 // Routes
 app.use("/api/v1/auth", authRoutes); // Auth routes (register, login)
-//app.use("/api/v1/notes", noteRoutes); // NEW: Notes routes
+app.use("/api/v1/notes", noteRoutes); // NEW: Notes routes
 
 //const { protect } = require("./middleware/authMiddleware");
 //app.post("/api/v1/auth/logout", logoutUser); // Logout route
