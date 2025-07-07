@@ -13,7 +13,7 @@ const authRoutes = require("./routes/authRoutes");
 const noteRoutes = require("./routes/noteRoutes"); // NEW: Import note routes
 const {
   logoutUser,
-  //  deleteUserAccount,
+  deleteUserAccount,
 } = require("./controllers/authController"); // NEW: Import specific auth controller functions for logout/delete
 
 // Create Express app
@@ -54,7 +54,7 @@ app.use("/api/v1/notes", noteRoutes); // NEW: Notes routes
 
 const { protect } = require("./middleware/authMiddleware");
 app.post("/api/v1/auth/logout", logoutUser); // Logout route
-//app.delete("/api/v1/auth/delete-account", protect, deleteUserAccount); // Delete account route, protected
+app.delete("/api/v1/auth/delete-account", protect, deleteUserAccount); // Delete account route, protected
 
 // Start Server
 const PORT = process.env.PORT || 5001;
