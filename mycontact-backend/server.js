@@ -10,11 +10,11 @@ const errorHandler = require("./middleware/errorHandler");
 
 // Import new routes and existing ones
 const authRoutes = require("./routes/authRoutes");
-const noteRoutes = require("./routes/noteRoutes"); // NEW: Import note routes
-const {
-  logoutUser,
-  deleteUserAccount,
-} = require("./controllers/authController"); // NEW: Import specific auth controller functions for logout/delete
+//const noteRoutes = require("./routes/noteRoutes"); // NEW: Import note routes
+//const {
+//  logoutUser,
+//  deleteUserAccount,
+//} = require("./controllers/authController"); // NEW: Import specific auth controller functions for logout/delete
 
 // Create Express app
 const app = express();
@@ -29,8 +29,8 @@ mongoose
 app.use(helmet());
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "http://localhost:3000", // Ensure this matches your frontend URL
-    credentials: true, // Important for sending cookies/headers with credentials
+    origin: process.env.CLIENT_URL || "http://localhost:3000",
+    credentials: true,
   })
 );
 app.use(express.json()); // Parses incoming JSON requests
@@ -50,12 +50,11 @@ app.use("/api", limiter); // Apply to all /api routes
 
 // Routes
 app.use("/api/v1/auth", authRoutes); // Auth routes (register, login)
-app.use("/api/v1/notes", noteRoutes); // NEW: Notes routes
+//app.use("/api/v1/notes", noteRoutes); // NEW: Notes routes
 
-// NEW: Add specific routes for logout and account deletion under auth path
-const { protect } = require("./middleware/authMiddleware"); // Make sure protect is imported here as well for these specific routes
-app.post("/api/v1/auth/logout", logoutUser); // Logout route
-app.delete("/api/v1/auth/delete-account", protect, deleteUserAccount); // Delete account route, protected
+//const { protect } = require("./middleware/authMiddleware");
+//app.post("/api/v1/auth/logout", logoutUser); // Logout route
+//app.delete("/api/v1/auth/delete-account", protect, deleteUserAccount); // Delete account route, protected
 
 // Start Server
 const PORT = process.env.PORT || 5001;
@@ -73,6 +72,6 @@ process.on("unhandledRejection", (err) => {
 const path = require("path");
 app.use(express.static(path.join(__dirname, "../client")));
 
-app.get("*", (req, res) => {
+app.get(/^(?!\/api).*/, (req, res) => {
   res.sendFile(path.join(__dirname, "../client/index.html"));
 });
