@@ -57,9 +57,6 @@ const { protect } = require("./middleware/authMiddleware"); // Make sure protect
 app.post("/api/v1/auth/logout", logoutUser); // Logout route
 app.delete("/api/v1/auth/delete-account", protect, deleteUserAccount); // Delete account route, protected
 
-// Error Handling (MUST be last middleware)
-app.use(errorHandler);
-
 // Start Server
 const PORT = process.env.PORT || 5001;
 const server = app.listen(PORT, () => {
