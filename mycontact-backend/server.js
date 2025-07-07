@@ -52,7 +52,7 @@ app.use("/api", limiter); // Apply to all /api routes
 app.use("/api/v1/auth", authRoutes); // Auth routes (register, login)
 app.use("/api/v1/notes", noteRoutes); // NEW: Notes routes
 
-//const { protect } = require("./middleware/authMiddleware");
+const { protect } = require("./middleware/authMiddleware");
 app.post("/api/v1/auth/logout", logoutUser); // Logout route
 //app.delete("/api/v1/auth/delete-account", protect, deleteUserAccount); // Delete account route, protected
 
