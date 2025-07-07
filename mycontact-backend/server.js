@@ -71,3 +71,16 @@ process.on("unhandledRejection", (err) => {
   console.error("Unhandled Rejection:", err);
   server.close(() => process.exit(1));
 });
+
+const path = require("path");
+
+// ✅ 1. Serve static frontend
+const path = require("path");
+app.use(express.static(path.join(__dirname, "../client")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/index.html"));
+});
+
+// ✅ 2. Error Handling Middleware (always last)
+app.use(errorHandler);
