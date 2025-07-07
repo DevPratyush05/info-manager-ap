@@ -72,8 +72,6 @@ process.on("unhandledRejection", (err) => {
   server.close(() => process.exit(1));
 });
 
-const path = require("path");
-
 // ✅ 1. Serve static frontend
 const path = require("path");
 app.use(express.static(path.join(__dirname, "../client")));
