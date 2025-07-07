@@ -19,7 +19,8 @@ A fullstack Contact & Notes Manager web application with secure user authenticat
 - Deployment: Render (coming soon)
 
 ## 📸 Screenshots
-
+![Image](https://github.com/user-attachments/assets/7fe02b86-77bd-4ba5-99b7-3a0a6c686b33)
+![Image](https://github.com/user-attachments/assets/04682059-1f5a-4afb-b145-34629bec6260)
 
 ## 🧪 Run Locally
 
