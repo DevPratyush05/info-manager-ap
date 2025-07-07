@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { registerUser, loginUser } = require("../controllers/authController"); // Ensure this path is correct
+const { registerUser, loginUser } = require("../controllers/authController");
 
 // Test route - verify this works first
 router.get("/test", (req, res) => {

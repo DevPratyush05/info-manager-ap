@@ -89,9 +89,6 @@ exports.loginUser = asyncHandler(async (req, res) => {
 // @route POST /api/v1/auth/logout
 // @access Public (or Private if invalidating server-side sessions)
 exports.logoutUser = asyncHandler(async (req, res) => {
-  // For JWTs stored client-side (like localStorage), logout primarily involves client-side token removal.
-  // However, we can send a success response to acknowledge the request.
-  // If you were using HTTP-only cookies, you'd clear the cookie here: res.clearCookie('token');
   res.status(200).json({ message: "Logged out successfully" });
 });
 
@@ -116,9 +113,7 @@ exports.deleteUserAccount = asyncHandler(async (req, res) => {
   await User.deleteOne({ _id: userId });
 
   // Invalidate token/session if applicable (for JWT, client removes it)
-  res
-    .status(200)
-    .json({
-      message: "Account and all associated notes deleted successfully.",
-    });
+  res.status(200).json({
+    message: "Account and all associated notes deleted successfully.",
+  });
 });

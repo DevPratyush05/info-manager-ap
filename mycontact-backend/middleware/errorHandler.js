@@ -3,15 +3,14 @@ const { constants } = require("../constants");
 const errorHandler = (err, req, res, next) => {
   const statusCode = res.statusCode ? res.statusCode : 500;
 
-  // Crucial: Only attempt to send a response if headers haven't already been sent
   if (res.headersSent) {
-    return next(err); // Let Express's default error handling take over
+    return next(err);
   }
 
   switch (statusCode) {
     case constants.VALIDATION_ERROR:
       res.status(statusCode).json({
-        title: "Validation Failed", // Corrected typo here
+        title: "Validation Failed",
         message: err.message,
         stackTrace: process.env.NODE_ENV === "production" ? null : err.stack,
       });
@@ -22,28 +21,28 @@ const errorHandler = (err, req, res, next) => {
         message: err.message,
         stackTrace: process.env.NODE_ENV === "production" ? null : err.stack,
       });
-      break; // <--- ADD THIS BREAK
+      break;
     case constants.UNAUTHORIZED:
       res.status(statusCode).json({
         title: "Unauthorized",
         message: err.message,
         stackTrace: process.env.NODE_ENV === "production" ? null : err.stack,
       });
-      break; // <--- ADD THIS BREAK
-    case constants.FORBIDEN:
+      break;
+    case constants.FORBIDDEN:
       res.status(statusCode).json({
         title: "Forbidden",
         message: err.message,
         stackTrace: process.env.NODE_ENV === "production" ? null : err.stack,
       });
-      break; // <--- ADD THIS BREAK
+      break;
     case constants.SERVER_ERROR:
       res.status(statusCode).json({
         title: "Server Error",
         message: err.message,
         stackTrace: process.env.NODE_ENV === "production" ? null : err.stack,
       });
-      break; // <--- ADD THIS BREAK
+      break;
     default:
       // Fallback for any other unhandled errors or if statusCode wasn't explicitly set
       res.status(500).json({

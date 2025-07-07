@@ -1,5 +1,4 @@
-// const api = "http://127.0.0.1:5001/api"; // OLD BASE
-const api = "http://127.0.0.1:5001/api/v1"; // NEW BASE API PATH
+const api = "https://info-manager-app.onrender.com/api/v1";
 
 // =====================
 // AUTHENTICATION LOGIC
@@ -38,7 +37,6 @@ if (registerForm) {
     const password = document.getElementById("registerPassword").value;
 
     try {
-      // Changed endpoint from /users/register to /auth/register
       const response = await fetch(`${api}/auth/register`, {
         method: "POST",
         headers: {
@@ -55,7 +53,7 @@ if (registerForm) {
 
       if (response.ok) {
         localStorage.setItem("token", data.token);
-        // Also store user data in localStorage, as it's returned by the backend
+
         localStorage.setItem(
           "user",
           JSON.stringify({
@@ -77,7 +75,6 @@ if (registerForm) {
 
 // Login user
 if (loginForm) {
-  // Inside the 'if (loginForm)' block
   loginForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     const email = document.getElementById("loginEmail").value;
@@ -87,7 +84,6 @@ if (loginForm) {
 
   async function login(email, password) {
     try {
-      // Changed endpoint from /users/login to /auth/login
       const response = await fetch(`${api}/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -124,8 +120,6 @@ if (loginForm) {
 
 // Utility function for showing alerts (optional, but good for user feedback)
 function showAlert(message, type = "info") {
-  // Implement a simple alert display, e.g., a div that appears and fades
-  // For now, we'll just use alert()
   alert(message);
 }
 
@@ -133,7 +127,6 @@ function showAlert(message, type = "info") {
 // NOTES DASHBOARD
 // =================
 
-// Check authentication on dashboard
 if (window.location.pathname.includes("dashboard.html")) {
   const token = localStorage.getItem("token");
 
@@ -185,7 +178,7 @@ if (window.location.pathname.includes("dashboard.html")) {
           document.getElementById("noteContent").value = "";
           loadNotes();
         } else {
-          const errorData = await response.json(); // Read error message from backend
+          const errorData = await response.json();
           alert(errorData.message || "Failed to add note");
         }
       } catch (error) {
@@ -289,7 +282,6 @@ if (window.location.pathname.includes("dashboard.html")) {
       // Corrected endpoint to /auth/logout
       const response = await fetch(`${api}/auth/logout`, {
         method: "POST",
-        // credentials: "include", // Only needed for cookie-based auth
       });
 
       if (response.ok) {

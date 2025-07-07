@@ -98,13 +98,12 @@ const deleteNote = asyncHandler(async (req, res) => {
     throw new Error("Note not found.");
   }
 
-  // Ensure the logged-in user owns the note
   if (note.user.toString() !== req.user.id) {
     res.status(401);
     throw new Error("Not authorized to delete this note.");
   }
 
-  await Note.deleteOne({ _id: req.params.id }); // Use deleteOne or findByIdAndDelete
+  await Note.deleteOne({ _id: req.params.id });
   res.status(200).json({ message: "Note removed successfully." });
 });
 
